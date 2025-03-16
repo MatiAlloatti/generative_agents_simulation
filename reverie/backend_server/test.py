@@ -8,9 +8,8 @@ import json
 import random
 import openai
 import time 
-
+import traceback
 from utils import *
-openai.api_key = openai_api_key
 
 def ChatGPT_request(prompt): 
   """
@@ -62,10 +61,6 @@ Example output json:
 """
 
 print (ChatGPT_request(prompt))
-
-
-
-
 
 
 
