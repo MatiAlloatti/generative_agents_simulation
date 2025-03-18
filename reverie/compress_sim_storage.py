@@ -60,7 +60,9 @@ def compress(sim_code):
 
 
 if __name__ == '__main__':
-  compress("July1_the_ville_isabella_maria_klaus-step-3-9")
+  input = input("Enter the project you want to compress (make sure it's in storage): ")
+  compress(input)
+
 
 
 
