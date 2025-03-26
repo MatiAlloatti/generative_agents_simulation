@@ -16,7 +16,7 @@ from persona.prompt_template.openai_logger_singleton import OpenAICostLogger_Sin
 config_path = Path("../../openai_config.json")
 with open(config_path, "r") as f:
     openai_config = json.load(f) 
-
+  
 def setup_client(type: str, config: dict):
   """Setup the OpenAI client.
 
@@ -98,14 +98,11 @@ def ChatGPT_request(prompt):
     a str of GPT-3's response. 
   """
   # temp_sleep()
-  
-  print("Debug: ",openai_config["model"])
   try: 
     completion = client.chat.completions.create(
     model=openai_config["model"],
     messages=[{"role": "user", "content": prompt}]
     )
-    max_tokens=500
     cost_logger.update_cost(completion, input_cost=openai_config["model-costs"]["input"], output_cost=openai_config["model-costs"]["output"])
     return completion.choices[0].message.content
   

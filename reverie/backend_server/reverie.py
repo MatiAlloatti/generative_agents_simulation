@@ -462,6 +462,7 @@ class ReverieServer:
           # Finishes the simulation environment and saves the progress. 
           # Example: fin
           self.save()
+          print("Save success!\n")
           break
 
         elif sim_command.lower() == "start path tester mode": 
@@ -634,19 +635,20 @@ class ReverieServer:
           break
 
 if __name__ == '__main__':
-
+  input_sim=input("Enter the base simulation : ")
+  input_sim_name=input("Enter the simulation name : ")
   # Pars input params
   parser = argparse.ArgumentParser(description='Reverie Server')
   parser.add_argument(
     '--origin',
     type=str,
-    default="base_the_ville_isabella_maria_klaus",
+    default=input_sim,
     help='The name of the forked simulation'
   )
   parser.add_argument(
     '--target',
     type=str,
-    default="test-simulation",
+    default=input_sim_name,
     help='The name of the new simulation'
   )
     
