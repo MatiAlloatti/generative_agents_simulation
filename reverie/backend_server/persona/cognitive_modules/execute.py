@@ -6,6 +6,7 @@ Description: This defines the "Act" module for generative agents.
 """
 import sys
 import random
+import re
 sys.path.append('../../')
 
 from global_methods import *
@@ -13,6 +14,7 @@ from path_finder import *
 from utils import *
 
 def execute(persona, maze, personas, plan): 
+  plan = re.sub(r'\s*:\s*', ':', plan)
   """
   Given a plan (action's string address), we execute the plan (actually 
   outputs the tile coordinate path and the next coordinate for the 
@@ -87,10 +89,15 @@ def execute(persona, maze, personas, plan):
       # Retrieve the target addresses. Again, plan is an action address in its
       # string form. <maze.address_tiles> takes this and returns candidate 
       # coordinates. 
-      if plan not in maze.address_tiles: 
-        maze.address_tiles["Johnson Park:park:park garden"] #ERRORRRRRRR
-      else: 
+      if plan not in maze.address_tiles:
+        print("Address not found:", plan)
+        print("Available address_tiles keys:")
+        for key in maze.address_tiles.keys():
+            print("-", key)
+        raise KeyError(f"Address '{plan}' not found in maze.address_tiles.")
+      else:
         target_tiles = maze.address_tiles[plan]
+
 
     # There are sometimes more than one tile returned from this (e.g., a tabe
     # may stretch many coordinates). So, we sample a few here. And from that 

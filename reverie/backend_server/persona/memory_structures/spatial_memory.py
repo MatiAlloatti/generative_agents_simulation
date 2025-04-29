@@ -102,9 +102,11 @@ class MemoryTree:
       return ""
 
     try: 
+      print("Available arenas:", list(self.tree[curr_world][curr_sector].keys()))
+      print("Trying to access:", curr_arena.lower().strip())
       x = ", ".join(list(self.tree[curr_world][curr_sector][curr_arena]))
     except: 
-      x = ", ".join(list(self.tree[curr_world][curr_sector][curr_arena.lower()]))
+      x = ", ".join(list(self.tree[curr_world][curr_sector][next(k for k in self.tree[curr_world][curr_sector] if k.lower().strip() == curr_arena.lower().strip())]))
     return x
 
 
