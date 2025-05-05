@@ -498,28 +498,37 @@ def run_gpt_prompt_task_decomp(persona,
   """
 
   # Some debugging prints
-  # print ("DEBUG")  
-  # print("PROMPT:")
-  # print (prompt)
-  # print("\nOUTPUT:")
-  # print (output)
+  print ("DEBUG")  
+  print("PROMPT:")
+  print (prompt)
+  print("\nOUTPUT:")
+  print (output)
 
   fin_output = []
   time_sum = 0
-  for i_task, i_duration in output: 
+  for item in output:
+    if not isinstance(item, (list, tuple)) or len(item) != 2:
+        print(f"bug：{item}")  # debug log
+        continue
+
+    i_task, i_duration = item
     time_sum += i_duration
-    # HM?????????
-    # if time_sum < duration: 
-    if time_sum <= duration: 
-      fin_output += [[i_task, i_duration]]
-    else: 
-      break
+    if time_sum <= duration:
+        fin_output.append([i_task, i_duration])
+    else:
+        break
   ftime_sum = 0
   for fi_task, fi_duration in fin_output: 
     ftime_sum += fi_duration
   
   # print ("for debugging... line 365", fin_output)
-  fin_output[-1][1] += (duration - ftime_sum)
+  if not fin_output:
+    print("auto give idle")
+    fin_output = [["idle", duration]]
+  else:
+    # 時間修正
+    ftime_sum = sum(d for _, d in fin_output)
+    fin_output[-1][1] += (duration - ftime_sum)
   output = fin_output 
 
 
