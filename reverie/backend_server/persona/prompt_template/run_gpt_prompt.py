@@ -498,11 +498,11 @@ def run_gpt_prompt_task_decomp(persona,
   """
 
   # Some debugging prints
-  print ("DEBUG")  
-  print("PROMPT:")
-  print (prompt)
-  print("\nOUTPUT:")
-  print (output)
+  #print ("DEBUG")  
+  #print("PROMPT:")
+  #print (prompt)
+  #print("\nOUTPUT:")
+  #print (output)
 
   fin_output = []
   time_sum = 0

@@ -7,6 +7,7 @@ memory that aids in grounding their behavior in the game world.
 """
 import json
 import sys
+import re
 sys.path.append('../../')
 
 from utils import *
@@ -88,7 +89,7 @@ class MemoryTree:
     temp_address is specified, we return the objects that are available in
     that arena, and if not, we return the objects that are in the arena our
     persona is currently in. 
-
+  
     INPUT
       temp_address: optional arena address
     OUTPUT 
@@ -96,8 +97,10 @@ class MemoryTree:
     EXAMPLE STR OUTPUT
       "phone, charger, bed, nightstand"
     """
+    print(f"[DEBUG] arena = {arena}")  
     curr_world, curr_sector, curr_arena = arena.split(":")
 
+    curr_arena = re.sub(r'[{}]', '', curr_arena).strip()
     if not curr_arena: 
       return ""
 

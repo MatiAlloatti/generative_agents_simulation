@@ -17,7 +17,11 @@ def generate_poig_score(persona, event_type, description):
     return 1
 
   if event_type == "event": 
-    return run_gpt_prompt_event_poignancy(persona, description)[0]
+    print(f"[DEBUG] Calling run_gpt_prompt_event_poignancy with: {description}")
+    try :
+      return run_gpt_prompt_event_poignancy(persona, description)[0]
+    except :
+      return 1
   elif event_type == "chat": 
     return run_gpt_prompt_chat_poignancy(persona, 
                            persona.scratch.act_description)[0]

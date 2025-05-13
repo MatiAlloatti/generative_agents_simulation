@@ -15,6 +15,7 @@ from utils import *
 
 def execute(persona, maze, personas, plan): 
   plan = re.sub(r'\s*:\s*', ':', plan)
+  plan = plan.replace("{", "").replace("}", "")
   """
   Given a plan (action's string address), we execute the plan (actually 
   outputs the tile coordinate path and the next coordinate for the 
